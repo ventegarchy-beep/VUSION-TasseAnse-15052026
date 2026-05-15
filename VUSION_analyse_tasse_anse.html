@@ -27,10 +27,7 @@
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
-    padding: 0;
   }
-
-  /* ─── HEADER ─── */
   .header {
     background: linear-gradient(135deg, #0d1b2a 0%, #1a2640 100%);
     border-bottom: 1px solid var(--border);
@@ -59,15 +56,13 @@
   }
   .verdict-badge {
     font-size: 13px; font-weight: 600;
-    background: rgba(91,141,239,0.15);
-    border: 1px solid rgba(91,141,239,0.35);
-    color: var(--accent);
+    background: rgba(62,207,142,0.12);
+    border: 1px solid rgba(62,207,142,0.35);
+    color: var(--green);
     border-radius: 6px;
     padding: 6px 16px;
     letter-spacing: 0.3px;
   }
-
-  /* ─── LAYOUT ─── */
   .content { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
   .section { margin-bottom: 36px; }
   .section-title {
@@ -78,8 +73,6 @@
     display: flex; align-items: center; gap: 8px;
   }
   .section-title::before { content: ''; display: block; width: 3px; height: 14px; background: var(--accent); border-radius: 2px; }
-
-  /* ─── CHART IMAGE ─── */
   .chart-container {
     background: var(--bg2);
     border: 1px solid var(--border);
@@ -93,8 +86,6 @@
     border-top: 1px solid var(--border);
     display: flex; gap: 6px; align-items: center;
   }
-
-  /* ─── SCHÉMA TASSE ─── */
   .schema-container {
     background: var(--bg2);
     border: 1px solid var(--border);
@@ -106,8 +97,6 @@
     font-size: 13px; font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 1px;
     margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
   }
-
-  /* ─── KEY LEVELS ─── */
   .levels-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -129,8 +118,7 @@
   .level-card.target .level-value { color: var(--green); }
   .level-card.bottom .level-value { color: var(--text2); }
   .level-card.resist .level-value { color: var(--red); }
-
-  /* ─── ANALYSIS BLOCKS ─── */
+  .level-card.anse .level-value { color: var(--purple); }
   .analysis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   @media (max-width: 700px) { .analysis-grid { grid-template-columns: 1fr; } }
   .analysis-card {
@@ -150,6 +138,7 @@
   .dot-red { background: var(--red); }
   .dot-blue { background: var(--accent); }
   .dot-purple { background: var(--purple); }
+  .dot-teal { background: var(--teal); }
   .analysis-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
   .analysis-list li {
     font-size: 13px; color: var(--text); line-height: 1.6;
@@ -163,8 +152,7 @@
   .hl-orange { color: var(--orange); font-weight: 600; }
   .hl-red { color: var(--red); font-weight: 600; }
   .hl-blue { color: var(--accent); font-weight: 600; }
-
-  /* ─── SCENARIO TABLE ─── */
+  .hl-purple { color: var(--purple); font-weight: 600; }
   .scenario-table { width: 100%; border-collapse: collapse; }
   .scenario-table th {
     font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;
@@ -177,6 +165,7 @@
   }
   .scenario-table tr:last-child td { border-bottom: none; }
   .scenario-table tr:hover td { background: rgba(255,255,255,0.03); }
+  .scenario-table tr.active td { background: rgba(62,207,142,0.05); }
   .badge {
     font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px;
     display: inline-block;
@@ -184,8 +173,8 @@
   .badge-bull { background: rgba(62,207,142,0.15); color: var(--green); }
   .badge-bear { background: rgba(240,93,93,0.15); color: var(--red); }
   .badge-neutral { background: rgba(255,255,255,0.08); color: var(--text2); }
-
-  /* ─── ALERT BOX ─── */
+  .badge-active { background: rgba(247,216,124,0.18); color: var(--yellow); }
+  .badge-progress { background: rgba(167,139,250,0.18); color: var(--purple); }
   .alert-box {
     background: rgba(245,166,35,0.08);
     border: 1px solid rgba(245,166,35,0.25);
@@ -195,8 +184,36 @@
     display: flex; gap: 10px; align-items: flex-start;
   }
   .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-
-  /* ─── FOOTER ─── */
+  .alert-green {
+    background: rgba(62,207,142,0.08);
+    border: 1px solid rgba(62,207,142,0.25);
+  }
+  .timeline {
+    display: flex; flex-direction: column; gap: 0;
+    border-left: 2px solid var(--border);
+    margin-left: 12px;
+    padding-left: 20px;
+  }
+  .tl-item {
+    position: relative; padding: 0 0 20px;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute; left: -27px; top: 4px;
+    width: 10px; height: 10px; border-radius: 50%;
+    border: 2px solid var(--bg2);
+  }
+  .tl-item.done::before { background: var(--green); }
+  .tl-item.active::before { background: var(--yellow); box-shadow: 0 0 8px var(--yellow); }
+  .tl-item.soon::before { background: var(--orange); }
+  .tl-item.future::before { background: var(--border); }
+  .tl-date { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .tl-item.done .tl-date { color: var(--green); }
+  .tl-item.active .tl-date { color: var(--yellow); }
+  .tl-item.soon .tl-date { color: var(--orange); }
+  .tl-item.future .tl-date { color: var(--text2); }
+  .tl-text { font-size: 13px; color: var(--text); line-height: 1.5; }
+  .tl-sub { font-size: 12px; color: var(--text2); margin-top: 3px; }
   .footer {
     background: var(--bg2);
     border-top: 1px solid var(--border);
@@ -208,9 +225,6 @@
 </head>
 <body>
 
-<!-- ══════════════════════════════════════
-     HEADER
-══════════════════════════════════════ -->
 <div class="header">
   <div class="header-left">
     <div class="ticker-row">
@@ -226,13 +240,10 @@
   <div class="header-meta">
     <div class="meta-badge">Dernier tick : 14 Mai 2026 · Graphique Hebdo</div>
     <div class="meta-badge">Indicateurs : SMA20/50/100 · Ichimoku · Bollinger · MACD</div>
-    <div class="verdict-badge">📐 Tasse avec Anse — En construction</div>
+    <div class="verdict-badge">⚡ Tasse avec Anse — Anse déjà en cours · Breakout imminent</div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     CONTENT
-══════════════════════════════════════ -->
 <div class="content">
 
   <!-- GRAPHIQUE ORIGINAL -->
@@ -246,276 +257,326 @@
     </div>
   </div>
 
-  <!-- NIVEAUX CLÉS -->
+  
+
+  <!-- TIMELINE -->
   <div class="section">
-    <div class="section-title">Niveaux clés identifiés (mèches incluses)</div>
-    <div class="levels-grid">
-      <div class="level-card current">
-        <div class="level-label">Cours actuel</div>
-        <div class="level-value">124,3 €</div>
-        <div class="level-sub">Paroi droite en construction</div>
-      </div>
-      <div class="level-card bottom">
-        <div class="level-label">Fond de la tasse (0 %)</div>
-        <div class="level-value">~100,4 €</div>
-        <div class="level-sub">Fib. 0 % · Point bas validé</div>
-      </div>
-      <div class="level-card neckline">
-        <div class="level-label">Ligne de cou — Neckline</div>
-        <div class="level-value">~147,3 €</div>
-        <div class="level-sub">Fib. 23,6 % · Résistance bord gauche</div>
-      </div>
-      <div class="level-card">
-        <div class="level-label">Résistance intermédiaire</div>
-        <div class="level-value">~142,5 €</div>
-        <div class="level-sub">Fib. 23,6 % · Zone de vigilance</div>
-      </div>
-      <div class="level-card target">
-        <div class="level-label">Objectif ℹ si breakout</div>
-        <div class="level-value">~194–200 €</div>
-        <div class="level-sub">Projection = Neckline + Hauteur tasse</div>
-      </div>
-      <div class="level-card resist">
-        <div class="level-label">Résistance majeure</div>
-        <div class="level-value">~200 €</div>
-        <div class="level-sub">Ligne rouge horizontale · Fib. 50 %</div>
+    <div class="section-title">Chronologie de la figure</div>
+    <div class="analysis-card">
+      <div class="timeline">
+        <div class="tl-item done">
+          <div class="tl-date">Juin 2025 — Pic à 278,9 €</div>
+          <div class="tl-text">Point haut absolu (Fib. 100 %) — début de la correction</div>
+          <div class="tl-sub">Bord gauche de la tasse</div>
+        </div>
+        <div class="tl-item done">
+          <div class="tl-date">Juillet–Décembre 2025 — Descente</div>
+          <div class="tl-text">Forte correction depuis 278 → 100 €, creusant la tasse</div>
+          <div class="tl-sub">Paroi gauche de la tasse tracée</div>
+        </div>
+        <div class="tl-item done">
+          <div class="tl-date">Janvier 2026 — Fond à ~100,4 €</div>
+          <div class="tl-text">Creux validé avec mèches, bougies rouges importantes → bas de la tasse</div>
+          <div class="tl-sub">Fib. 0 % · Point de retournement</div>
+        </div>
+        <div class="tl-item done">
+          <div class="tl-date">Février–Mars 2026 — Rebond paroi droite</div>
+          <div class="tl-text">Le cours remonte de ~100 vers ~130–140 € · Paroi droite de la tasse en construction</div>
+          <div class="tl-sub">Retour progressif vers la neckline</div>
+        </div>
+        <div class="tl-item active">
+          <div class="tl-date">Avril–Mai 2026 — ANSE EN COURS ⟵ Nous sommes ici</div>
+          <div class="tl-text">Léger repli depuis ~140 vers ~110 puis rechargement à 124,3 € · C'est l'anse qui se dessine</div>
+          <div class="tl-sub">Figure ~70–80 % complète · Cours à 124,3 €</div>
+        </div>
+        <div class="tl-item soon">
+          <div class="tl-date">Prochain — Approche de la neckline ~147 €</div>
+          <div class="tl-text">Si le cours continue de monter, il va tester la résistance à ~140,8 puis ~147 €</div>
+          <div class="tl-sub">Signal de breakout imminant</div>
+        </div>
+        <div class="tl-item future">
+          <div class="tl-date">Objectif — Breakout confirmé &gt; 147 €</div>
+          <div class="tl-text">Validation de la figure complète → projection ~194–200 €</div>
+          <div class="tl-sub">Clôture hebdo + volumes nécessaires</div>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- SCHÉMA FIGURE -->
   <div class="section">
-    <div class="section-title">Schéma de la figure — Tasse avec Anse</div>
+    <div class="section-title">Schéma annoté — Tasse avec Anse (version révisée)</div>
     <div class="schema-container">
-      <div class="schema-title">📐 Construction actuelle de la figure</div>
-      <svg width="100%" viewBox="0 0 860 320" role="img">
-        <title>Schéma tasse avec anse VUSION</title>
+      <div class="schema-title">📐 Lecture révisée : anse déjà formée depuis avril 2026</div>
+      <svg width="100%" viewBox="0 0 860 330" role="img">
+        <title>Schéma tasse avec anse VUSION — version révisée</title>
         <defs>
           <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
             <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </marker>
         </defs>
 
-        <!-- Fond -->
-        <rect x="0" y="0" width="860" height="320" fill="#171b26" rx="8"/>
+        <rect x="0" y="0" width="860" height="330" fill="#171b26" rx="8"/>
 
-        <!-- Grille horizontale légère -->
-        <line x1="30" y1="60" x2="830" y2="60" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-        <line x1="30" y1="110" x2="830" y2="110" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-        <line x1="30" y1="160" x2="830" y2="160" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-        <line x1="30" y1="210" x2="830" y2="210" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-        <line x1="30" y1="260" x2="830" y2="260" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <!-- Grilles -->
+        <line x1="30" y1="55" x2="830" y2="55" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <line x1="30" y1="105" x2="830" y2="105" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <line x1="30" y1="155" x2="830" y2="155" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <line x1="30" y1="205" x2="830" y2="205" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <line x1="30" y1="255" x2="830" y2="255" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
 
-        <!-- Étiquettes prix (axe Y) -->
-        <text x="22" y="64"  fill="#9095a8" font-size="10" text-anchor="end" font-family="SF Pro Display, sans-serif">200</text>
-        <text x="22" y="114" fill="#9095a8" font-size="10" text-anchor="end" font-family="SF Pro Display, sans-serif">168</text>
-        <text x="22" y="164" fill="#9095a8" font-size="10" text-anchor="end" font-family="SF Pro Display, sans-serif">147</text>
-        <text x="22" y="214" fill="#9095a8" font-size="10" text-anchor="end" font-family="SF Pro Display, sans-serif">124</text>
-        <text x="22" y="264" fill="#9095a8" font-size="10" text-anchor="end" font-family="SF Pro Display, sans-serif">100</text>
+        <!-- Étiquettes prix -->
+        <text x="22" y="59"  fill="#9095a8" font-size="10" text-anchor="end" font-family="SF Pro Display, sans-serif">200</text>
+        <text x="22" y="109" fill="#9095a8" font-size="10" text-anchor="end" font-family="SF Pro Display, sans-serif">168</text>
+        <text x="22" y="159" fill="#9095a8" font-size="10" text-anchor="end" font-family="SF Pro Display, sans-serif">147</text>
+        <text x="22" y="209" fill="#9095a8" font-size="10" text-anchor="end" font-family="SF Pro Display, sans-serif">124</text>
+        <text x="22" y="259" fill="#9095a8" font-size="10" text-anchor="end" font-family="SF Pro Display, sans-serif">100</text>
 
-        <!-- Zone objectif (fond vert transparent) -->
-        <rect x="600" y="48" width="230" height="26" fill="rgba(62,207,142,0.07)" rx="3"/>
+        <!-- Zone objectif -->
+        <rect x="640" y="43" width="200" height="22" fill="rgba(62,207,142,0.07)" rx="3"/>
 
-        <!-- Ligne de cou --- trait orange pointillé -->
-        <line x1="30" y1="164" x2="830" y2="164" stroke="#f5a623" stroke-width="1.2" stroke-dasharray="6 4"/>
+        <!-- Ligne neckline ~147 -->
+        <line x1="30" y1="159" x2="830" y2="159" stroke="#f5a623" stroke-width="1.2" stroke-dasharray="6 4"/>
+        <!-- Résistance 200 -->
+        <line x1="30" y1="55" x2="830" y2="55" stroke="#f05d5d" stroke-width="1" stroke-dasharray="4 4" opacity="0.7"/>
 
-        <!-- Ligne résistance majeure 200 --- trait rouge pointillé -->
-        <line x1="30" y1="60" x2="830" y2="60" stroke="#f05d5d" stroke-width="1" stroke-dasharray="4 4" opacity="0.7"/>
-
-        <!-- ═══════════════════════
-             COURBE TASSE (spline manuelle)
-             Bord gauche ~147 (y=164) → fond ~100 (y=260) → cours actuel ~124 (y=214)
-        ═══════════════════════ -->
-        <!-- Bord gauche (descente de ~220→340 en x, de 164→260 en y) -->
-        <path d="M 200 164 C 230 164 270 230 310 260"
+        <!-- ═══ COURBE TASSE (trait plein bleu) ═══ -->
+        <!-- Paroi gauche (bord gauche ~147 → fond ~100) -->
+        <path d="M 120 159 C 155 159 200 230 240 258"
               fill="none" stroke="#5b8def" stroke-width="2.5" stroke-linecap="round"/>
-        <!-- Fond arrondi (de 310 y=260 → 460 y=260) -->
-        <path d="M 310 260 Q 385 275 460 260"
+        <!-- Fond arrondi -->
+        <path d="M 240 258 Q 320 273 400 258"
               fill="none" stroke="#5b8def" stroke-width="2.5" stroke-linecap="round"/>
-        <!-- Paroi droite en construction (fond → cours actuel, trait plein + futur pointillé) -->
-        <path d="M 460 260 C 490 260 520 240 555 214"
+        <!-- Paroi droite remonte JUSQU'À la neckline ~147 (y=159) -->
+        <path d="M 400 258 C 430 258 475 210 510 159"
               fill="none" stroke="#5b8def" stroke-width="2.5" stroke-linecap="round"/>
-        <!-- Futur : cours → neckline (pointillé bleu) -->
-        <path d="M 555 214 C 575 195 590 175 610 164"
-              fill="none" stroke="#5b8def" stroke-width="1.8" stroke-dasharray="5 4" stroke-linecap="round" opacity="0.6"/>
-        <!-- Anse (pointillé plus léger) : neckline → petit repli → breakout -->
-        <path d="M 610 164 C 620 174 635 185 650 178 C 665 170 680 164 700 164"
-              fill="none" stroke="#f5a623" stroke-width="1.8" stroke-dasharray="4 3" stroke-linecap="round" opacity="0.7"/>
-        <!-- Breakout vers objectif (flèche verte) -->
-        <path d="M 700 164 L 700 60"
-              fill="none" stroke="#3ecf8e" stroke-width="2" stroke-linecap="round" marker-end="url(#arr)" opacity="0.8"/>
 
-        <!-- ZONE OBJECTIF (flèche double sens) -->
-        <line x1="795" y1="64" x2="795" y2="160" stroke="#3ecf8e" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"/>
+        <!-- ═══ ANSE (trait violet — depuis la neckline) ═══ -->
+        <!-- Repli depuis neckline ~147 → fond anse ~115 -->
+        <path d="M 510 159 C 525 159 540 185 555 210 C 564 225 572 232 578 238"
+              fill="none" stroke="#a78bfa" stroke-width="2.2" stroke-linecap="round"/>
+        <!-- Rechargement depuis ~115 → cours actuel ~124 -->
+        <path d="M 578 238 C 585 232 598 220 618 210"
+              fill="none" stroke="#a78bfa" stroke-width="2.2" stroke-linecap="round"/>
+        <!-- Futur : cours → neckline (pointillé violet) -->
+        <path d="M 618 210 C 632 192 648 172 668 159"
+              fill="none" stroke="#a78bfa" stroke-width="1.8" stroke-dasharray="5 4" stroke-linecap="round" opacity="0.6"/>
+        <!-- Breakout (flèche verte) -->
+        <path d="M 668 159 L 705 159 L 705 55"
+              fill="none" stroke="#3ecf8e" stroke-width="2" stroke-linecap="round" marker-end="url(#arr)" opacity="0.85"/>
 
-        <!-- POINTS CLÉS (cercles) -->
+        <!-- ÉTIQUETTES TEMPORELLES (axe X) -->
+        <text x="122" y="305" fill="#9095a8" font-size="9" text-anchor="middle" font-family="SF Pro Display, sans-serif">Juin 2025</text>
+        <text x="320" y="305" fill="#9095a8" font-size="9" text-anchor="middle" font-family="SF Pro Display, sans-serif">Janv. 2026</text>
+        <text x="510" y="305" fill="#9095a8" font-size="9" text-anchor="middle" font-family="SF Pro Display, sans-serif">Mars 2026</text>
+        <text x="618" y="305" fill="#f7d87c" font-size="9" text-anchor="middle" font-family="SF Pro Display, sans-serif" font-weight="600">Mai 2026</text>
+        <text x="705" y="305" fill="#3ecf8e" font-size="9" text-anchor="middle" font-family="SF Pro Display, sans-serif">?? 2026</text>
+
+        <!-- Lignes verticales dates -->
+        <line x1="122" y1="290" x2="122" y2="298" stroke="#9095a8" stroke-width="0.5"/>
+        <line x1="320" y1="290" x2="320" y2="298" stroke="#9095a8" stroke-width="0.5"/>
+        <line x1="510" y1="290" x2="510" y2="298" stroke="#9095a8" stroke-width="0.5"/>
+        <line x1="618" y1="290" x2="618" y2="298" stroke="#f7d87c" stroke-width="0.5"/>
+        <line x1="705" y1="290" x2="705" y2="298" stroke="#3ecf8e" stroke-width="0.5"/>
+
+        <!-- POINTS CLÉS -->
         <!-- Bord gauche -->
-        <circle cx="200" cy="164" r="5" fill="#f5a623" stroke="#171b26" stroke-width="2"/>
-        <!-- Fond -->
-        <circle cx="385" cy="270" r="5" fill="#9095a8" stroke="#171b26" stroke-width="2"/>
+        <circle cx="120" cy="159" r="5" fill="#f5a623" stroke="#171b26" stroke-width="2"/>
+        <!-- Fond tasse -->
+        <circle cx="320" cy="266" r="5" fill="#9095a8" stroke="#171b26" stroke-width="2"/>
+        <!-- Sommet paroi droite = neckline -->
+        <circle cx="510" cy="159" r="5" fill="#f5a623" stroke="#171b26" stroke-width="2"/>
+        <!-- Creux anse -->
+        <circle cx="578" cy="238" r="5" fill="#a78bfa" stroke="#171b26" stroke-width="2"/>
         <!-- Cours actuel -->
-        <circle cx="555" cy="214" r="6" fill="#f7d87c" stroke="#171b26" stroke-width="2"/>
-        <!-- Neckline future (bord droit) -->
-        <circle cx="610" cy="164" r="4" fill="#f5a623" stroke="#171b26" stroke-width="2" opacity="0.6"/>
-        <!-- Breakout point -->
-        <circle cx="700" cy="164" r="4" fill="#3ecf8e" stroke="#171b26" stroke-width="2" opacity="0.7"/>
+        <circle cx="618" cy="210" r="6" fill="#f7d87c" stroke="#171b26" stroke-width="2"/>
+        <!-- Breakout futur -->
+        <circle cx="668" cy="159" r="4" fill="#f5a623" stroke="#171b26" stroke-width="2" opacity="0.5"/>
+        <circle cx="705" cy="159" r="4" fill="#3ecf8e" stroke="#171b26" stroke-width="2" opacity="0.7"/>
 
         <!-- LABELS -->
-        <!-- Bord gauche de la tasse -->
-        <text x="188" y="152" fill="#f5a623" font-size="10" text-anchor="middle" font-family="SF Pro Display, sans-serif" font-weight="600">Bord gauche</text>
-        <text x="188" y="164" fill="#f5a623" font-size="10" text-anchor="middle" font-family="SF Pro Display, sans-serif">~147 €</text>
+        <!-- Bord gauche -->
+        <text x="108" y="148" fill="#f5a623" font-size="9" text-anchor="middle" font-family="SF Pro Display, sans-serif">Bord G.</text>
+        <text x="108" y="158" fill="#f5a623" font-size="9" text-anchor="middle" font-family="SF Pro Display, sans-serif">~147 €</text>
 
-        <!-- Fond tasse -->
-        <text x="385" y="295" fill="#9095a8" font-size="10" text-anchor="middle" font-family="SF Pro Display, sans-serif">Fond</text>
-        <text x="385" y="307" fill="#9095a8" font-size="10" text-anchor="middle" font-family="SF Pro Display, sans-serif">~100,4 €</text>
+        <!-- Fond -->
+        <text x="320" y="283" fill="#9095a8" font-size="9" text-anchor="middle" font-family="SF Pro Display, sans-serif">Fond ~100 €</text>
+
+        <!-- Bord droit = aussi sur la neckline -->
+        <text x="510" y="148" fill="#f5a623" font-size="9" text-anchor="middle" font-family="SF Pro Display, sans-serif">Bord D.</text>
+        <text x="510" y="158" fill="#f5a623" font-size="9" text-anchor="middle" font-family="SF Pro Display, sans-serif">~147 €</text>
+
+        <!-- Label creux anse -->
+        <rect x="488" y="248" width="102" height="18" fill="rgba(167,139,250,0.12)" rx="3"/>
+        <text x="539" y="260" fill="#a78bfa" font-size="9" text-anchor="middle" font-family="SF Pro Display, sans-serif" font-weight="600">Anse en cours ✓</text>
 
         <!-- Cours actuel -->
-        <rect x="530" y="218" width="78" height="22" fill="rgba(247,216,124,0.12)" rx="3"/>
-        <text x="569" y="232" fill="#f7d87c" font-size="10" text-anchor="middle" font-family="SF Pro Display, sans-serif" font-weight="700">Cours : 124,3 €</text>
+        <rect x="580" y="194" width="80" height="18" fill="rgba(247,216,124,0.12)" rx="3"/>
+        <text x="620" y="206" fill="#f7d87c" font-size="9" text-anchor="middle" font-family="SF Pro Display, sans-serif" font-weight="700">Cours 124,3 €</text>
 
-        <!-- Neckline label -->
-        <text x="840" y="168" fill="#f5a623" font-size="10" text-anchor="end" font-family="SF Pro Display, sans-serif" font-weight="600">Neckline ~147 €</text>
-
-        <!-- Résistance 200 label -->
-        <text x="840" y="56" fill="#f05d5d" font-size="10" text-anchor="end" font-family="SF Pro Display, sans-serif">Résistance 200 €</text>
-
-        <!-- Objectif label -->
-        <text x="808" y="95" fill="#3ecf8e" font-size="10" text-anchor="start" font-family="SF Pro Display, sans-serif" font-weight="700">Objectif</text>
-        <text x="808" y="108" fill="#3ecf8e" font-size="10" text-anchor="start" font-family="SF Pro Display, sans-serif">~194–200 €</text>
-
-        <!-- Anse label -->
-        <text x="650" y="200" fill="#f5a623" font-size="9" text-anchor="middle" font-family="SF Pro Display, sans-serif" opacity="0.8">Anse (à venir)</text>
+        <!-- Labels axe Y -->
+        <text x="840" y="163" fill="#f5a623" font-size="9" text-anchor="end" font-family="SF Pro Display, sans-serif" font-weight="600">Neckline ~147 €</text>
+        <text x="840" y="52" fill="#f05d5d" font-size="9" text-anchor="end" font-family="SF Pro Display, sans-serif">Résistance 200 €</text>
+        <text x="720" y="96" fill="#3ecf8e" font-size="9" text-anchor="start" font-family="SF Pro Display, sans-serif" font-weight="700">Objectif</text>
+        <text x="720" y="108" fill="#3ecf8e" font-size="9" text-anchor="start" font-family="SF Pro Display, sans-serif">~194–200 €</text>
 
         <!-- Légende -->
-        <rect x="30" y="290" width="800" height="24" fill="rgba(255,255,255,0.02)" rx="4"/>
-        <!-- Tasse -->
-        <line x1="48" y1="302" x2="72" y2="302" stroke="#5b8def" stroke-width="2"/>
-        <text x="78" y="306" fill="#9095a8" font-size="9" font-family="SF Pro Display, sans-serif">Paroi tasse (confirmé)</text>
-        <!-- Futur -->
-        <line x1="200" y1="302" x2="220" y2="302" stroke="#5b8def" stroke-width="1.5" stroke-dasharray="4 3"/>
-        <text x="226" y="306" fill="#9095a8" font-size="9" font-family="SF Pro Display, sans-serif">Paroi droite (projection)</text>
-        <!-- Anse -->
-        <line x1="370" y1="302" x2="390" y2="302" stroke="#f5a623" stroke-width="1.5" stroke-dasharray="4 3"/>
-        <text x="396" y="306" fill="#9095a8" font-size="9" font-family="SF Pro Display, sans-serif">Anse potentielle</text>
-        <!-- Breakout -->
-        <line x1="520" y1="302" x2="540" y2="302" stroke="#3ecf8e" stroke-width="2" marker-end="url(#arr)"/>
-        <text x="548" y="306" fill="#9095a8" font-size="9" font-family="SF Pro Display, sans-serif">Breakout + objectif</text>
-        <!-- Neckline -->
-        <line x1="660" y1="302" x2="680" y2="302" stroke="#f5a623" stroke-width="1.2" stroke-dasharray="5 3"/>
-        <text x="686" y="306" fill="#9095a8" font-size="9" font-family="SF Pro Display, sans-serif">Neckline</text>
+        <rect x="30" y="315" width="800" height="1" fill="rgba(255,255,255,0.06)"/>
+        <line x1="45" y1="325" x2="65" y2="325" stroke="#5b8def" stroke-width="2"/>
+        <text x="70" y="328" fill="#9095a8" font-size="8" font-family="SF Pro Display, sans-serif">Tasse (confirmée)</text>
+        <line x1="195" y1="325" x2="215" y2="325" stroke="#a78bfa" stroke-width="2"/>
+        <text x="220" y="328" fill="#9095a8" font-size="8" font-family="SF Pro Display, sans-serif">Anse (en cours)</text>
+        <line x1="330" y1="325" x2="350" y2="325" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <text x="355" y="328" fill="#9095a8" font-size="8" font-family="SF Pro Display, sans-serif">Sortie anse (projection)</text>
+        <line x1="500" y1="325" x2="520" y2="325" stroke="#3ecf8e" stroke-width="2" marker-end="url(#arr)"/>
+        <text x="528" y="328" fill="#9095a8" font-size="8" font-family="SF Pro Display, sans-serif">Breakout + objectif</text>
+        <line x1="650" y1="325" x2="670" y2="325" stroke="#f5a623" stroke-width="1.2" stroke-dasharray="5 3"/>
+        <text x="675" y="328" fill="#9095a8" font-size="8" font-family="SF Pro Display, sans-serif">Neckline</text>
       </svg>
     </div>
   </div>
 
-  <!-- ANALYSE TECHNIQUE -->
+  <!-- NIVEAUX CLÉS -->
+  <div class="section">
+    <div class="section-title">Niveaux clés (mèches incluses)</div>
+    <div class="levels-grid">
+      <div class="level-card current">
+        <div class="level-label">Cours actuel</div>
+        <div class="level-value">124,3 €</div>
+        <div class="level-sub">Sortie d'anse en cours ⟵</div>
+      </div>
+      <div class="level-card bottom">
+        <div class="level-label">Fond tasse (0 %)</div>
+        <div class="level-value">~100,4 €</div>
+        <div class="level-sub">Janv. 2026 · Validé</div>
+      </div>
+      <div class="level-card anse">
+        <div class="level-label">Zone anse</div>
+        <div class="level-value">~110–140 €</div>
+        <div class="level-sub">Avr.–Mai 2026 · En cours</div>
+      </div>
+      <div class="level-card">
+        <div class="level-label">Résistance intermédiaire</div>
+        <div class="level-value">~140,8 €</div>
+        <div class="level-sub">Premier obstacle à franchir</div>
+      </div>
+      <div class="level-card neckline">
+        <div class="level-label">Neckline — Signal clé</div>
+        <div class="level-value">~147 €</div>
+        <div class="level-sub">Fib. 23,6 % · Breakout ici</div>
+      </div>
+      <div class="level-card target">
+        <div class="level-label">Objectif si breakout</div>
+        <div class="level-value">~194–200 €</div>
+        <div class="level-sub">Neckline + hauteur tasse</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANALYSE -->
   <div class="section">
     <div class="section-title">Analyse point par point</div>
     <div class="analysis-grid">
 
-      <!-- STRUCTURE DE LA FIGURE -->
       <div class="analysis-card">
-        <div class="analysis-card-title"><span class="dot dot-blue"></span>Structure de la tasse avec anse</div>
+        <div class="analysis-card-title"><span class="dot dot-purple"></span>L'anse — lecture révisée</div>
         <ul class="analysis-list">
-          <li>La figure se construit après la chute depuis le top <span class="highlight">278,9 €</span> (Fib. 100 %) jusqu'au fond <span class="highlight">~100,4 €</span> (Fib. 0 %).</li>
-          <li>Le <span class="hl-orange">bord gauche</span> de la tasse se situe autour de <span class="hl-orange">~147 €</span> — une résistance établie lors de la descente.</li>
-          <li>Le <span class="hl-blue">fond arrondi</span> (~100 €) est validé avec mèches incluses, ce qui est la bonne méthode pour cette figure.</li>
-          <li>La <span class="hl-blue">paroi droite</span> est en cours de construction : le cours grimpe de 100 vers 147 (actuellement à 124,3 €).</li>
-          <li>L'<span class="hl-orange">anse</span> ne sera dessinée qu'une fois le cours approchant <span class="hl-orange">~147 €</span>. Il est trop tôt pour en parler.</li>
+          <li>Après le rebond depuis le fond (~100 €), le cours est remonté vers <span class="hl-purple">~130–140 €</span> en mars 2026, constituant la paroi droite de la tasse.</li>
+          <li>Le <span class="hl-purple">repli d'avril 2026</span> depuis ~140 vers ~110–115 € correspond au creux de l'anse.</li>
+          <li>Le <span class="hl-orange">rechargement en mai 2026</span> à 124,3 € marque la sortie de l'anse par le haut.</li>
+          <li>La figure est donc <span class="hl-purple">~75–80 % complète</span> — le breakout de la neckline est le dernier élément manquant.</li>
         </ul>
       </div>
 
-      <!-- CALCUL OBJECTIF -->
       <div class="analysis-card">
-        <div class="analysis-card-title"><span class="dot dot-green"></span>Calcul de l'objectif</div>
+        <div class="analysis-card-title"><span class="dot dot-green"></span>Calcul objectif (inchangé)</div>
         <ul class="analysis-list">
-          <li>Méthode classique : <span class="highlight">Hauteur tasse + Neckline</span></li>
-          <li>Hauteur = <span class="hl-orange">147,3 €</span> (neckline) − <span class="highlight">100,4 €</span> (fond) = <span class="hl-green">~47 points</span></li>
-          <li>Objectif = <span class="hl-orange">147,3</span> + <span class="hl-green">47</span> = <span class="hl-green">~194–200 €</span></li>
-          <li>Forte confluence avec la <span class="hl-blue">résistance majeure à 200 €</span> (ligne rouge horizontale) et le <span class="hl-blue">Fib. 50 % à 189,6 €</span>.</li>
-          <li>L'objectif est conditionnel à un <span class="hl-green">breakout confirmé</span> au-dessus de 147 €, idéalement en clôture hebdomadaire.</li>
+          <li>Hauteur = <span class="hl-orange">147 €</span> (neckline) − <span class="highlight">100,4 €</span> (fond) = <span class="hl-green">~47 pts</span></li>
+          <li>Objectif = <span class="hl-orange">147</span> + <span class="hl-green">47</span> = <span class="hl-green">~194–200 €</span></li>
+          <li>Confluence forte : résistance horizontale <span class="hl-blue">200 €</span> + Fib. 50 % à <span class="hl-blue">189,6 €</span>.</li>
+          <li>Potentiel de <span class="hl-green">+58 %</span> depuis le cours actuel de 124,3 € si la figure se réalise intégralement.</li>
         </ul>
       </div>
 
-      <!-- MÈCHES -->
       <div class="analysis-card">
-        <div class="analysis-card-title"><span class="dot dot-purple"></span>Faut-il prendre les mèches ?</div>
+        <div class="analysis-card-title"><span class="dot dot-orange"></span>Niveaux immédiats à surveiller</div>
         <ul class="analysis-list">
-          <li><span class="hl-green">Oui, absolument.</span> Pour une tasse avec anse, on utilise les <span class="highlight">mèches extrêmes</span> (points hauts/bas effectivement testés).</li>
-          <li>Ignorer les mèches conduirait à sous-estimer l'amplitude réelle de la figure.</li>
-          <li>Fond avec mèche : <span class="highlight">100,4 €</span> (vs corps de bougie ~105 €) — différence significative.</li>
-          <li>Le marché a réellement testé ces niveaux ; ils constituent les vrais points de référence pour le calcul.</li>
+          <li><span class="hl-orange">~130 €</span> — première compression, zone de test rapide</li>
+          <li><span class="hl-orange">~140,8 €</span> — résistance visible sur le PRT (ligne droite)</li>
+          <li><span class="hl-orange">~142,5 €</span> — Fib. 23,6 % (faible écart avec 147)</li>
+          <li><span class="hl-green">~147 €</span> — <strong>neckline</strong> : clôture hebdomadaire au-dessus = figure validée</li>
+          <li>Une correction sous <span class="hl-red">~105 €</span> invaliderait la thèse</li>
         </ul>
       </div>
 
-      <!-- CONTEXTE ICHIMOKU / INDICATEURS -->
       <div class="analysis-card">
-        <div class="analysis-card-title"><span class="dot dot-orange"></span>Contexte indicateurs</div>
+        <div class="analysis-card-title"><span class="dot dot-blue"></span>Indicateurs — contexte</div>
         <ul class="analysis-list">
-          <li><span class="hl-orange">RSI (14)</span> autour de ~40 : encore bas, laisse de la marge haussière avant zone de surachat.</li>
-          <li><span class="hl-orange">MACD Zéro Lag</span> : en territoire négatif (-3,10), mais le momentum se remet en route depuis le fond.</li>
-          <li>Le <span class="hl-blue">Kumo Ichimoku</span> épais au-dessus représente une résistance structurelle importante à traverser.</li>
-          <li>Les <span class="hl-blue">SMA 100 et SMA 50</span> sont en train d'être retestées — clé de voûte pour la suite.</li>
+          <li><span class="hl-blue">RSI (14)</span> ~40 : pas suracheté, marge haussière disponible avant zone de résistance.</li>
+          <li><span class="hl-blue">MACD</span> encore négatif mais remonte — momentum en amélioration cohérent avec la sortie d'anse.</li>
+          <li><span class="hl-orange">Kumo Ichimoku</span> toujours épais au-dessus : résistance dynamique à absorber autour de 140–160 €.</li>
+          <li>La <span class="hl-blue">SMA 50</span> (~140 €) coïncide avec la neckline — double résistance technique à ce niveau.</li>
         </ul>
       </div>
 
     </div>
   </div>
 
-  <!-- SÉQUENCE PRIX -->
+  <!-- TABLE SÉQUENCE -->
   <div class="section">
-    <div class="section-title">Séquence de prix à surveiller</div>
+    <div class="section-title">Statut de la figure — version actualisée</div>
     <div class="analysis-card">
       <table class="scenario-table">
         <thead>
           <tr>
             <th>Étape</th>
             <th>Niveau</th>
-            <th>Signification</th>
+            <th>Période</th>
             <th>Statut</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>① Fond validé</td>
+            <td>① Fond tasse validé</td>
             <td class="hl-green">~100,4 €</td>
-            <td>Point bas avec mèche — base de la tasse confirmée</td>
+            <td>Janv. 2026</td>
             <td><span class="badge badge-bull">✓ Validé</span></td>
           </tr>
           <tr>
             <td>② Paroi droite</td>
-            <td class="highlight">~124,3 € →</td>
-            <td>Construction en cours — cours remonte vers la neckline</td>
-            <td><span class="badge badge-neutral">⟳ En cours</span></td>
+            <td class="highlight">~100 → ~140 €</td>
+            <td>Janv.–Mars 2026</td>
+            <td><span class="badge badge-bull">✓ Faite</span></td>
           </tr>
           <tr>
-            <td>③ Résistance intermédiaire</td>
-            <td class="hl-orange">~130 / 142 €</td>
-            <td>SMA50 + Fib. 23,6 % — obstacles sur la route</td>
+            <td>③ Formation anse (repli)</td>
+            <td style="color:#a78bfa;font-weight:600">~140 → ~110 €</td>
+            <td>Avril 2026</td>
+            <td><span class="badge badge-progress">⟳ En cours</span></td>
+          </tr>
+          <tr class="active">
+            <td>④ Sortie anse — <strong>Nous sommes ici</strong></td>
+            <td class="highlight">124,3 € →</td>
+            <td>Mai 2026</td>
+            <td><span class="badge badge-active">▶ Actif</span></td>
+          </tr>
+          <tr>
+            <td>⑤ Test résistance 140,8 €</td>
+            <td class="hl-orange">~140,8 €</td>
+            <td>Prochain</td>
             <td><span class="badge badge-neutral">◎ À surveiller</span></td>
-          </tr>
-          <tr>
-            <td>④ Approche neckline</td>
-            <td class="hl-orange">~147 €</td>
-            <td>Le cours s'approche du bord droit — anse possible ici</td>
-            <td><span class="badge badge-neutral">◎ À venir</span></td>
-          </tr>
-          <tr>
-            <td>⑤ Formation anse</td>
-            <td class="hl-orange">~135–147 €</td>
-            <td>Léger repli technique avant le breakout</td>
-            <td><span class="badge badge-neutral">◎ À venir</span></td>
           </tr>
           <tr>
             <td>⑥ Breakout neckline</td>
             <td class="hl-green">&gt; 147 € clôture</td>
-            <td>Validation de la figure — signal haussier fort</td>
+            <td>??</td>
             <td><span class="badge badge-neutral">◎ À confirmer</span></td>
           </tr>
           <tr>
             <td>⑦ Objectif</td>
             <td class="hl-green">~194–200 €</td>
-            <td>Cible naturelle de la figure — confluence Fib. 50 %</td>
-            <td><span class="badge badge-bull">🎯 Si figure réalisée</span></td>
+            <td>Post breakout</td>
+            <td><span class="badge badge-bull">🎯 Si validé</span></td>
           </tr>
         </tbody>
       </table>
@@ -526,26 +587,25 @@
   <div class="section">
     <div class="section-title">Points de vigilance</div>
     <div style="display: flex; flex-direction: column; gap: 10px;">
+      <div class="alert-box" style="border-color:rgba(240,93,93,0.25);background:rgba(240,93,93,0.06);">
+        <span class="alert-icon">🔴</span>
+        <span>La figure n'est <strong>pas encore validée</strong>. Le breakout en clôture hebdomadaire au-dessus de <strong>~147 €</strong> avec volumes est le signal de confirmation obligatoire. Ne pas anticiper.</span>
+      </div>
       <div class="alert-box">
         <span class="alert-icon">⚠️</span>
-        <span>La figure <strong>n'est pas encore validée</strong>. Le breakout au-dessus de <strong>~147 €</strong> en clôture hebdomadaire (avec volumes) sera le signal de confirmation. Tout ce qui précède est une <em>construction en cours</em>.</span>
+        <span>Double résistance à <strong>~140–142 €</strong> : SMA 50 + Fib. 23,6 % + bord supérieur du Kumo. Ce niveau peut provoquer un deuxième repli avant le breakout final — ce serait normal et ne remettrait pas en cause la figure.</span>
       </div>
-      <div class="alert-box" style="border-color: rgba(240,93,93,0.25); background: rgba(240,93,93,0.06);">
-        <span class="alert-icon">🔴</span>
-        <span>Le <strong>Kumo Ichimoku</strong> épais constitue une résistance structurelle majeure. Le cours devra l'absorber pour que la figure se développe pleinement. Un refus net sous <strong>130 €</strong> remettrait en question la thèse.</span>
-      </div>
-      <div class="alert-box" style="border-color: rgba(91,141,239,0.25); background: rgba(91,141,239,0.06);">
+      <div class="alert-box" style="border-color:rgba(91,141,239,0.25);background:rgba(91,141,239,0.06);">
         <span class="alert-icon">ℹ️</span>
-        <span>Résistances intermédiaires à surveiller : <strong>~130 €</strong> (zone de compression), <strong>~140,8 €</strong> (niveau affiché PRT), <strong>~142,5 €</strong> (Fib. 23,6 %) et enfin <strong>~174,9 €</strong> si la neckline est franchie.</span>
+        <span>Scénario invalidant : clôture hebdomadaire sous <strong>~105 €</strong>. En dehors de ça, la construction de la figure reste intacte. La volatilité dans la zone 110–140 est attendue et fait partie de la formation normale de l'anse.</span>
       </div>
     </div>
   </div>
 
 </div>
 
-<!-- FOOTER -->
 <div class="footer">
-  Analyse technique · VUSION (VU) · Euronext Paris · Rapport généré le 15 Mai 2026 · 
+  Analyse technique · VUSION (VU) · Euronext Paris · 15 Mai 2026 · 
   ⚠️ Cette analyse est fournie à titre informatif uniquement et ne constitue pas un conseil en investissement.
 </div>
 
